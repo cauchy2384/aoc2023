@@ -1,7 +1,7 @@
 package aoc2023.d02
 
-import scala.util.control.Breaks._
-import scala.collection.mutable.ListBuffer 
+import scala.collection.mutable.ListBuffer
+import scala.util.control.Breaks._ 
 
 @main def part1() =
     val ans = solution1("src/main/resources/d02.txt") 
@@ -12,40 +12,29 @@ def solution1(filename: String): Int =
         .getLines()
         .toStream
         .map(isLineValid)
+        .filter(_._2)
+        .map(_._1)
         .reduce((a, b) => a + b)
 
-def isLineValid(line: String): Int =
+def isLineValid(line: String): (Int, Boolean) =
     val splitted = line.split(":")
     val game = splitted(0).replace("Game ", "").toInt
     val sets = splitted(1).split(";")
-    var possible = true
-    sets.foreach({
-        // parse "7 green, 4 blue, 3 red" in list
-        set => {
-            val splittedSet = set.split(",")
-            splittedSet.foreach({
-                item => {
-                    val splittedItem = item.trim().split(" ")
-                    val count = splittedItem(0).toInt
-                    val color = splittedItem(1)
-                    // check that there is no more than
-                    var limits = Map("green" -> 13, "blue" -> 14, "red" -> 12) 
-                    breakable {
-                        limits.foreach({
-                            case (k, v) => {
-                                if (color == k && count > v) {
-                                    possible = false
-                                    break
-                                }
-                            }
-                        })
-                    }
-                }
-            })
-        }
-    })
 
-    if !possible then 0 else game
+    val isValid = sets
+        .map(set => set.trim().split(",")
+            .map(reveal => reveal.trim().split(" "))
+            .map(reveal => (reveal(0).toInt, reveal(1).trim()))
+            .map(reveal => reveal._2 match {
+                case "green" => reveal._1 <= 13
+                case "blue" => reveal._1 <= 14
+                case "red" => reveal._1 <= 12
+            })
+            .fold(true)(_ && _)
+        )
+        .fold(true)(_ && _)
+
+    return (game, isValid)
 
 @main def part2() =
     val ans = solution2("src/main/resources/d02.txt") 
@@ -55,33 +44,26 @@ def solution2(filename: String): Int =
     io.Source.fromFile(filename)
         .getLines()
         .toStream
-        .map(calcLinePower)
+        .map(power)
+        .map((a, b, c) => a * b * c)
         .reduce((a, b) => a + b)
 
-def calcLinePower(line: String): Int =
+def power(line: String): (Int, Int, Int) =
     val splitted = line.split(":")
     val sets = splitted(1).split(";")
 
-    var blues = ListBuffer[Int]()
-    var greens = ListBuffer[Int]() 
-    var reds =  ListBuffer[Int]()
-    sets.foreach({
-        set => {
-            val splittedSet = set.split(",")
-            splittedSet.foreach({
-                item => {
-                    val splittedItem = item.trim().split(" ")
-                    val count = splittedItem(0).toInt
-                    val color = splittedItem(1)
-                    color match {
-                        case "blue" => blues += count
-                        case "green" => greens += count
-                        case "red" => reds += count
-                    }
-                }
-            })
+    sets
+      .map(set => set.trim().split(",")
+        .map(reveal => reveal.trim().split(" "))
+        .map(reveal => (reveal(0).toInt, reveal(1).trim()))
+      )
+      .flatten
+      .foldLeft((0, 0, 0)) { (acc: (Int, Int, Int), x: (Int, String)) =>
+        val (green, blue, red) = acc
+        val (num, color) = x
+        color match {
+          case "green" => (green.max(num), blue, red)
+          case "blue" => (green, blue.max(num), red)
+          case "red" => (green, blue, red.max(num))
         }
-    })
-
-    val power = blues.max * greens.max * reds.max
-    power
+      }  
