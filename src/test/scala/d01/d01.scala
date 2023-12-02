@@ -1,6 +1,6 @@
 import aoc2023.d01
 
-import org.scalatest.prop.TableDrivenPropertyChecks
+import org.scalatest.prop.TableDrivenPropertyChecks._
 
 class D01 extends munit.FunSuite {
   test("example") {
