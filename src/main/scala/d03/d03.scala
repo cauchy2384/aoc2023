@@ -3,10 +3,6 @@ package aoc2023.d03
 import scala.collection.mutable.ListBuffer
 import scala.util.control.Breaks._ 
 
-@main def part1() =
-    val ans = solution1("src/main/resources/d03.txt") 
-    println(ans)
-
 def solution1(filename: String): Int =
     val matrix = parseMatrix(filename)
     
@@ -66,25 +62,6 @@ def cellWeight(matrix: Array[Array[Char]], row: Int, col: Int): Int =
     if matrix(row)(col) != '.' then return 1
 
     return 0
-
-def printNumber(matrix: Array[Array[Char]], rn: Int, l: Int, r: Int) =
-    // for every cell around
-    val w = Array(rn - 1, rn, rn + 1)
-        .foreach((row) => {
-            Range(l - 1, r + 2)
-                .foreach((col) => {
-                    // if not in matrix
-                    if row < 0 || row >= matrix.length || col < 0 || col >= matrix(row).length then 
-                        print("x")
-                    else 
-                        print(matrix(row)(col))
-                })
-                print("\n")
-        })
-
-@main def part2() =
-    val ans = solution2("src/main/resources/d03.txt") 
-    println(ans)
 
 def solution2(filename: String): Int =
     val matrix = parseMatrix(filename)

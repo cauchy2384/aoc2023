@@ -49,7 +49,6 @@ def solution2(filename: String): BigInt =
         .filter(_.endsWith("A"))
         .map(start => run2(path, map, start, 0, start, List()))
         .map(x => {
-            println(x)
             BigInt(x(0))
         })
         .foldLeft(0: BigInt)((acc, x) => {

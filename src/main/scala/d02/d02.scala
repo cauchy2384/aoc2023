@@ -3,10 +3,6 @@ package aoc2023.d02
 import scala.collection.mutable.ListBuffer
 import scala.util.control.Breaks._ 
 
-@main def part1() =
-    val ans = solution1("src/main/resources/d02.txt") 
-    println(ans)
-
 def solution1(filename: String): Int =
     io.Source.fromFile(filename)
         .getLines()
@@ -35,10 +31,6 @@ def isLineValid(line: String): (Int, Boolean) =
         .fold(true)(_ && _)
 
     return (game, isValid)
-
-@main def part2() =
-    val ans = solution2("src/main/resources/d02.txt") 
-    println(ans)
 
 def solution2(filename: String): Int =
     io.Source.fromFile(filename)

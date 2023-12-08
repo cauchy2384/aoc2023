@@ -9,9 +9,21 @@ class D02 extends munit.FunSuite {
     assertEquals(obtained, expected)
   }
 
-    test("example p2") {
+  test("part1") {
+    val obtained = d02.solution1("src/main/resources/d02.txt")
+    val expected = 2447
+    assertEquals(obtained, expected)
+  }
+
+  test("example p2") {
     val obtained = d02.solution2("src/test/resources/d02.txt")
     val expected = 2286
+    assertEquals(obtained, expected)
+  }
+
+  test("part2") {
+    val obtained = d02.solution2("src/main/resources/d02.txt")
+    val expected = 56322
     assertEquals(obtained, expected)
   }
 }

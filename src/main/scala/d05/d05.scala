@@ -1,9 +1,5 @@
 package aoc2023.d05
 
-@main def part1() =
-    val ans = solution1("src/main/resources/d05.txt") 
-    println(ans)
-
 def solution1(filename: String): Long =
     val (almanac, _, _) = io.Source.fromFile(filename)
         .getLines()
@@ -106,23 +102,19 @@ class Almanac {
                     else
                         var (a, b) = (rng(0), rng(1))
                         if b < rng2.src then
-                            // println(s"[$a, $b] before [${rng2.src}, ${rng2.upper()}]")
                             acc
                         else if a > rng2.upper() then
-                            // println(s"[$a, $b] after [${rng2.src}, ${rng2.upper()}]")
                             acc
                         else if a < rng2.src && b <= rng2.upper() then
                             val b2 = rng2.src - 1
                             val x = rng2.convert(rng2.src)
                             val y = rng2.convert(b)
-                            // println(s"[$a, $b] overlaps of [${rng2.src}, ${rng2.upper()}] => [$x, $y] left: [$a, $b2]")
                             res = Array(x, y) :: res
                             (Array(a, b2), res)
                         else if rng2.src <= a && b <= rng2.upper() then
                             val x = rng2.convert(a)
                             val y = rng2.convert(b)
                             res = Array(x, y) :: res
-                            // println(s"[$a, $b] in [${rng2.src}, ${rng2.upper()}] => [$x, $y]")
                             (null, res)
                         else if a < rng2.src && b > rng2.upper() then
                             val x1 = a
@@ -130,7 +122,6 @@ class Almanac {
                             val x2 = rng2.convert(rng2.src)
                             val y2 = rng2.convert(rng2.upper())
                             val a2 = rng2.upper() + 1
-                            // println(s"[$a, $b] overlaps of [${rng2.src}, ${rng2.upper()}] => [$x1, $y1], [$x2, $y2] left: [$a2, $b]")
                             res = Array(x1, y1) :: Array(x2, y2) :: res
                             (Array(a2, b), res)
                         else
@@ -138,7 +129,6 @@ class Almanac {
                             val y = rng2.convert(rng2.upper())
                             res = Array(x, y) :: res
                             val a2 = rng2.upper() + 1
-                            // println(s"[$a, $b] in [${rng2.src}, ${rng2.upper()}] => [$x, $y] left: [$a2, $b]")
                             (Array(a2, b), res)
                 })
             if left != null then

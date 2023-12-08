@@ -2,20 +2,12 @@ package aoc2023.d04
 
 import scala.collection.mutable.Queue
 
-@main def part1() =
-    val ans = solution1("src/main/resources/d04.txt") 
-    println(ans)
-
 def solution1(filename: String): Int =
     io.Source.fromFile(filename)
         .getLines()
         .toStream
         .map(parseCard)
         .foldLeft(0)((score, card) => score + card.score())
-
-@main def part2() =
-    val ans = solution2("src/main/resources/d04.txt") 
-    println(ans)        
 
 def solution2(filename: String): Int =
     val cards = io.Source.fromFile(filename)

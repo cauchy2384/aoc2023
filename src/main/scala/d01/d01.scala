@@ -2,10 +2,6 @@ package aoc2023.d01
 
 import scala.util.control.Breaks._
 
-@main def part1() =
-    val ans = solution1("src/main/resources/d01.txt") 
-    println(ans)
-
 def solution1(filename: String): Int =
     io.Source.fromFile(filename)
         .getLines()
@@ -19,10 +15,6 @@ def fix(line: String): Int =
         .map(_.asDigit)
     
     digits.head * 10 + digits.last
-
-@main def part2wrong() =
-    val ans = solution2("src/main/resources/d01.txt") 
-    println(ans)
 
 def solution2(filename: String): Int =
     io.Source.fromFile(filename)
@@ -50,10 +42,6 @@ def parseDigits(line: String): String =
             acc.replaceAll(mapping._1, mapping._2)
         }
     }
-
-@main def part2() =
-    val ans = solution3("src/main/resources/d01.txt") 
-    println(ans)
 
 def solution3(filename: String): Int =
     io.Source.fromFile(filename)
