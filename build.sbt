@@ -13,3 +13,5 @@ lazy val root = project
       "org.scalatest" %% "scalatest" % "3.2.17" % Test
     )
   )
+
+cancelable in Global := true
