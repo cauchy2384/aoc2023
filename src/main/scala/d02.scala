@@ -1,7 +1,6 @@
 package aoc2023.d02
 
 import scala.collection.mutable.ListBuffer
-import scala.util.control.Breaks._ 
 
 def solution1(filename: String): Int =
     io.Source.fromFile(filename)
