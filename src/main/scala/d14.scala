@@ -71,8 +71,8 @@ object Directions extends Enumeration {
 class Matrix {
     var mx = Map[Coordinate, Char]()
 
-    def xmax(): Int = mx.keys.map(_.x).max
-    def ymax(): Int = mx.keys.map(_.y).max
+    lazy val xmax: Int = mx.keys.map(_.x).max
+    lazy val ymax: Int = mx.keys.map(_.y).max
 
     def add(c: Coordinate, v: Char) = mx = mx + (c -> v)
 
@@ -84,16 +84,16 @@ class Matrix {
 
     def tilt(d: Directions.Value) = {
         val ys = d match {
-            case Directions.N => (0 to ymax())
-            case Directions.S => (0 to ymax()).reverse
-            case Directions.E => (0 to xmax()).reverse
-            case Directions.W => (0 to xmax())
+            case Directions.N => (0 to ymax)
+            case Directions.S => (0 to ymax).reverse
+            case Directions.E => (0 to xmax).reverse
+            case Directions.W => (0 to xmax)
         }
         val xs = d match {
-            case Directions.N => (0 to xmax())
-            case Directions.S => (0 to xmax())
-            case Directions.E => (0 to ymax())
-            case Directions.W => (0 to ymax())
+            case Directions.N => (0 to xmax)
+            case Directions.S => (0 to xmax)
+            case Directions.E => (0 to ymax)
+            case Directions.W => (0 to ymax)
         }
         
         ys.foreach(y => {
@@ -132,9 +132,9 @@ class Matrix {
     }
 
     def load(): Long = {
-        (0 to ymax())
+        (0 to ymax)
             .foldLeft(0L)((acc, y) => {
-                (0 to xmax())
+                (0 to xmax)
                     .foldLeft(acc)((acc, x) => {
                         acc + rockLoad(Coordinate(x, y))
                     })
@@ -143,15 +143,15 @@ class Matrix {
 
     def rockLoad(c: Coordinate): Long = {
         if mx.getOrElse(c, '?') == 'O' then
-            val rows: Long = ymax() - c.y + 1
+            val rows: Long = ymax - c.y + 1
             rows
         else
             0L 
     }
 
     override def toString(): String = 
-        (0 to ymax())
-            .map(y => (0 to xmax())
+        (0 to ymax)
+            .map(y => (0 to xmax)
                 .map(x => mx(Coordinate(x, y)))
                 .mkString("")
             )
