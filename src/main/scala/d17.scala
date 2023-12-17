@@ -45,6 +45,7 @@ def solution(filename: String, minSteps: Int, maxSteps: Int): Int =
 
     var q = PriorityQueue[State](
         State(Coordinate(0, 0), 0, Directions.R, 0, Coordinate(-1, -1)),
+        State(Coordinate(0, 0), 0, Directions.D, 0, Coordinate(-1, -1)),
     )(Ordering.by((_: State).heat).reverse)
 
     dijkstra(q)

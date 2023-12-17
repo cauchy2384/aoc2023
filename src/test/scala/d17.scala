@@ -9,11 +9,11 @@ class D17 extends munit.FunSuite {
     assertEquals(obtained, expected)
   }
 
-  // test("p1") {
-  //   val obtained = d17.solution("src/main/resources/d17.txt", 0, 3)
-  //   val expected = 674
-  //   assertEquals(obtained, expected)
-  // }
+  test("p1") {
+    val obtained = d17.solution("src/main/resources/d17.txt", 0, 3)
+    val expected = 674
+    assertEquals(obtained, expected)
+  }
 
   test("example p2") {
     val obtained = d17.solution("src/test/resources/d17.txt", 4, 10)
@@ -29,8 +29,7 @@ class D17 extends munit.FunSuite {
 
   test("p2") {
     val obtained = d17.solution("src/main/resources/d17.txt", 4, 10)
-    // 777 too high
-    val expected = 0
+    val expected = 773
     assertEquals(obtained, expected)
   }
 }
