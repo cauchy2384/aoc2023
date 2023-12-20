@@ -29,7 +29,7 @@ class D13 extends munit.FunSuite {
 
   test("p2") {
     val obtained = d13.solution2("src/main/resources/d13.txt")
-    val expected = 0L
+    val expected = 34795L
     assertEquals(obtained, expected)
   }
 }
