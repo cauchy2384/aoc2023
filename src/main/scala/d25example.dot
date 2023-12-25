@@ -1,0 +1,36 @@
+digraph G {
+	ratio=expand
+	rsh -> frs
+	rsh -> pzl
+	rsh -> lsr
+	qnr -> nvd
+	jqt -> rhn
+	jqt -> xhk
+	jqt -> nvd
+	xhk -> hfx
+	cmg -> qnr
+	cmg -> nvd
+	cmg -> lhk
+	cmg -> bvb
+	rhn -> xhk
+	rhn -> bvb
+	rhn -> hfx
+	nvd -> lhk
+	ntq -> jqt
+	ntq -> hfx
+	ntq -> bvb
+	ntq -> xhk
+	lsr -> lhk
+	pzl -> lsr
+	pzl -> hfx
+	pzl -> nvd
+	rzs -> qnr
+	rzs -> cmg
+	rzs -> lsr
+	rzs -> rsh
+	bvb -> xhk
+	bvb -> hfx
+	frs -> qnr
+	frs -> lhk
+	frs -> lsr
+}
